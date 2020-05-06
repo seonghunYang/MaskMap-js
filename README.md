@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+[![HitCount](http://hits.dwyl.com/seonghunYang/Stock-Market_Live.svg)](http://hits.dwyl.com/seonghunYang/Stock-Market_Live)
+
+
 ## Available Scripts
 
 In the project directory, you can run:
