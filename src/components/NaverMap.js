@@ -4,7 +4,7 @@ import React from 'react';
 import { styled } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 import { setMapZoom, setMapCenter } from '../actions/index';
-
+import _ from 'lodash';
 import pinGreen from "../green.png";
 import pinRed from "../red.png";
 import pinBlack from "../black.png";
@@ -31,7 +31,7 @@ class NaverMap extends React.Component {
     ];  
 
     var bounds = this.map.getBounds();
-    this.props.stores.forEach(store => {
+    _.each(this.props.stores, store => {
       if (this.markers[store.code]) {
         return;
       }
@@ -78,6 +78,9 @@ class NaverMap extends React.Component {
 }
 
   render() {
+    // if (this.map){
+    //   this.loadPins();
+    // }
     return (
       <MapDiv ref={this.mapRef}></MapDiv>
     )
