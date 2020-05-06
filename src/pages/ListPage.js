@@ -5,21 +5,36 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
+
 import { useSelector } from 'react-redux'
+import StoreHelper from '../util/StoreHelper';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+import { ListItemIcon } from '@material-ui/core';
 
 const StoreItem = ({ store }) => {
-  const {addr, name, remain_state, stock_at} = store;
+  const {addr, name, stock_at} = store;
+  const {color, desc, short} = StoreHelper(store); 
   return (
     <ListItem>
-      <ListItemAvatar>
-          <Avatar>
-            <ImageIcon />
-          </Avatar>
-        </ListItemAvatar>
-      <ListItemText primary={name} secondary={addr} />
+      <ListItemIcon>
+        <StorefrontIcon style={{color}} />
+      </ListItemIcon>
+      <ListItemText primary={
+        <React.Fragment>
+          <span style={{color}}>
+            <b>{name}</b> ({desc})
+          </span>
+        </React.Fragment>
+      } secondary={
+        <React.Fragment>
+          <span>
+          {addr}
+          </span><br/>
+          <span style={{color: "#ccc"}}>
+            입고: {stock_at}
+          </span>
+        </React.Fragment>
+      } />
     </ListItem>
   )
 }
@@ -40,7 +55,7 @@ const ListPage = () => {
       <AppBar />
 
       <List className={classes.root}>
-        {stores.map(store => (<StoreItem store={store} />))}
+        {stores.map(store => (<StoreItem key={store.code} store={store} />))}
       </List>
       
       <BottomNav />

@@ -3,6 +3,8 @@ import produce from 'immer';
 const baseState = {
   loading: false,
   error: "",
+  mapCenter: [37.3595704 , 127.105399],
+  mapZoom: 14,
   stores: [
       {
         addr: '경기도 성남시 분당구 서현로210번길 2 105호 (서현동, 성지하이츠텔)',
@@ -128,7 +130,16 @@ const baseState = {
     ] 
 }
 const reducer = produce((state, action) => {
-
+  switch(action.type) {
+    case "SET_MAP_ZOOM":
+      state.mapZoom = action.payload;
+      break;
+    case "SET_MAP_CENTER":
+      state.mapCenter = action.payload;
+      break;
+    default:
+      break;
+  }
 }, baseState);
 
 export default reducer;
