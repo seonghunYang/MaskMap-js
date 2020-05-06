@@ -14,12 +14,12 @@ function stat2idx(remain_stat) {
 const COLOR = ["#000", grey[500], red[600], amber[600], green[800], grey[900]];
 const DESC = ["정보없음", "1개 이하", "2~29개", "30~99개", "100개 이상", "판매중지"];
 const SHORT = ["-", "0-1", "2+", "30+", "100+","x"];
-
 export default function(store) {
 
   const idx = stat2idx(store.remain_stat);
 
   return {
+    idx: idx,
     color: COLOR[idx],
     desc: DESC[idx],
     short: SHORT[idx],
