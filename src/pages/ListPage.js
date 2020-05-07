@@ -10,12 +10,17 @@ import { useSelector } from 'react-redux'
 import StoreHelper from '../util/StoreHelper';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import { ListItemIcon } from '@material-ui/core';
+import { Link } from "react-router-dom";
 
 const StoreItem = ({ store }) => {
   const {addr, name, stock_at} = store;
   const {color, desc, short} = StoreHelper(store); 
   return (
-    <ListItem>
+    <ListItem
+      button={true}
+      component={Link}
+      to={`/stores/${store.code}`}
+    >
       <ListItemIcon>
         <StorefrontIcon style={{color}} />
       </ListItemIcon>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -6,11 +6,14 @@ import {
   Route,
 } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
+import {fetchStoreByGeo} from './actions';
+import { useSelector, useDispatch } from 'react-redux';
 
 import AboutPage from './pages/AboutPage';
 import HelpPage from './pages/HelpPage';
 import MapPage from './pages/MapPage';
 import ListPage from './pages/ListPage';
+import StorePage from './pages/StorePage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +23,11 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-
+  const dispatch = useDispatch();
+  const center = useSelector(state => state.center);
+  useEffect(() => {
+    dispatch(fetchStoreByGeo(...center, 5000));
+  })
   return (
     <Router>
       <div className={classes.root}>
@@ -33,6 +40,9 @@ function App() {
           </Route>
           <Route path="/Help">
             <HelpPage />
+          </Route>
+          <Route path="/stores/:code">
+            <StorePage />
           </Route>
           <Route path="/">
             <MapPage />
